@@ -1,12 +1,13 @@
-{% extends "unauthenticated_base.html" %}
-{% block title %}
-    Login
-{% endblock title %}
+{% extends "base.html" %}
 {% block content %}
-    <h2>Log In</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form }}
-        <button type="submit">Log In</button>
-    </form>
+    <div class="container col-4 my-5 text-center border">
+        <h4>Admin Login</h4>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="text-end">
+                <button type="submit" class="btn btn-primary">Log In</button>
+            </div>
+        </form>
+    </div>
 {% endblock content %}
