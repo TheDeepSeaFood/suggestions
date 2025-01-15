@@ -17,5 +17,40 @@
             </div>
         </div>
     </form>
-    
+    <!-- Bootstrap Modal -->
+    <div class="modal fade"
+         id="successModal"
+         tabindex="-1"
+         aria-labelledby="successModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="successModalLabel">Success</h5>
+                    <button type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                            onclick="location.reload();"></button>
+                </div>
+                <div class="modal-body">
+                    {{ messages|join:" " }}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="location.reload();">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% block scripts %}
+        <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const successModal = document.getElementById('successModal');
+            {% if messages %}
+                const bootstrapModal = new bootstrap.Modal(successModal);
+                bootstrapModal.show();
+            {% endif %}
+        });
+        </script>
+    {% endblock scripts %}
 {% endblock content %}

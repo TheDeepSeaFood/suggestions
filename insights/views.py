@@ -10,7 +10,6 @@ from insights.models import Insight
 logger = logging.getLogger("django")
 
 
-# Create View
 class InsightCreateView(CreateView):
     model = Insight
     form_class = InsightForm
@@ -20,15 +19,11 @@ class InsightCreateView(CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["page_title"] = "Suggestions/Feedback"
-        context["meta_description"] = "The Deep Seafood Company"
-        context["meta_keywords"] = "The Deep Seafood Company"
         return context
 
     def form_valid(self, form):
         messages.success(
-            self.request,
-            "Your Feedback/Suggestion has been recoded successfully",
-            extra_tags="alert-success",
+            self.request, "Your Feedback/Suggestion has been recoded successfully"
         )
         return super().form_valid(form)
 
