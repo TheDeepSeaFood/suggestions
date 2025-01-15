@@ -1,6 +1,13 @@
 from django.db import models
 
 
+class Brand(models.Model):
+    name = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name
+
+
 class Insight(models.Model):
     name = models.CharField(max_length=100)
     department = models.CharField(max_length=100)

@@ -1,5 +1,10 @@
 from django.contrib import admin
-from insights.models import Insight
+from insights.models import Insight, Brand
+
+
+@admin.register(Brand)
+class BrandAdmin(admin.ModelAdmin):
+    list_display = ("name",)
 
 
 @admin.register(Insight)
