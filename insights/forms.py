@@ -5,7 +5,7 @@ from insights.models import Insight
 class InsightForm(forms.ModelForm):
     class Meta:
         model = Insight
-        fields = "__all__"
+        fields = ["name", "department", "feedback_or_suggestion", "related_department"]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

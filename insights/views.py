@@ -1,8 +1,9 @@
 import logging
 
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
-from django.views.generic import CreateView
+from django.views.generic import CreateView, ListView
 
 from insights.forms import InsightForm
 from insights.models import Insight
@@ -32,3 +33,11 @@ class InsightCreateView(CreateView):
             for errors in error_list:
                 messages.error(self.request, errors, extra_tags="alert-danger")
         return super().form_invalid(form)
+
+
+class InsightListView(LoginRequiredMixin, ListView):
+    model = Insight
+    template_name = "insights/list_insights.html"
+    context_object_name = "insights"
+    ordering = ["department"]
+    paginate_by = 10

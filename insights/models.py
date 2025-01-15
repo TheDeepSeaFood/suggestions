@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 
 class Brand(models.Model):
@@ -13,6 +14,7 @@ class Insight(models.Model):
     department = models.CharField(max_length=100)
     feedback_or_suggestion = models.TextField()
     related_department = models.CharField(max_length=100)
+    created_at = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return self.name

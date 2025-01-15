@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    {% include "navigation_bar.html" %}
+    <div class="container">
+        <table class="table table-striped table-hover table-bordered mt-2">
+            <thead>
+                <tr>
+                    <th scope="col">Sl. No.</th>
+                    <th scope="col">Created At</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Department</th>
+                    <th scope="col">Feedback/Suggestion</th>
+                    <th scope="col">Related Department</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for insight in insights %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ insight.created_at }}</td>
+                        <td>{{ insight.name }}</td>
+                        <td>{{ insight.department }}</td>
+                        <td class="text-break">{{ insight.feedback_or_suggestion }}</td>
+                        <td>{{ insight.related_department }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% include "pagination.html" %}
+{% endblock content %}
