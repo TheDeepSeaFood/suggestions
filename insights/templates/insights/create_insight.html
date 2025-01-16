@@ -1,56 +1,176 @@
 {% extends "base.html" %}
 {% load static %}
+{% block links %}
+    <style>
+    input[type=file]::-webkit-file-upload-button, input[type=file].invalid::-webkit-file-upload-button, input[type=file].valid::-webkit-file-upload-button {
+        color: #fff;
+        font-size: 13px;
+        border: 0;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        -ms-border-radius: 3px;
+        border-radius: 3px;
+        padding: 8px 10px 8px 38px;
+        font-weight: 600;
+        background: #1dbe72 url({% static 'images/icons/upload_icon.svg' %}) 8px center no-repeat;
+        outline: none;
+      }
+      
+    </style>
+{% endblock links %}
 {% block content %}
-    <form method="post">
-        {% csrf_token %}
-        <div class="container col-5 p-3">
-            <div class="mt-4 border rounded-4 p-3">
-                <img src="{% static 'images/banner/insight_banner.jpg' %}"
-                     class="mb-2"
-                     alt="Insight Banner"
-                     width="580px"
-                     height="160px">
-                {{ form.as_p }}
-                <div class="d-grid gap-2 d-md-block text-end">
-                    <button type="submit" class="btn btn-primary w-25">Submit</button>
-                </div>
-            </div>
-        </div>
-    </form>
-    <!-- Bootstrap Modal -->
-    <div class="modal fade"
-         id="successModal"
-         tabindex="-1"
-         aria-labelledby="successModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="successModalLabel">Success</h5>
-                    <button type="button"
-                            class="btn-close"
-                            data-bs-dismiss="modal"
-                            aria-label="Close"
-                            onclick="location.reload();"></button>
-                </div>
-                <div class="modal-body">
-                    {{ messages|join:" " }}
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="location.reload();">Close</button>
-                </div>
-            </div>
-        </div>
+    <div id="preloader">
+        <div data-loader="circle-side"></div>
     </div>
-    {% block scripts %}
-        <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const successModal = document.getElementById('successModal');
-            {% if messages %}
-                const bootstrapModal = new bootstrap.Modal(successModal);
-                bootstrapModal.show();
-            {% endif %}
-        });
-        </script>
-    {% endblock scripts %}
+    <!-- /Preload -->
+    <div id="loader_form">
+        <div data-loader="circle-side-2"></div>
+    </div>
+    <!-- /loader_form -->
+    <nav>
+        <ul class="cd-primary-nav">
+            <li>Visit</li>
+            <li>
+                <a href="https://thedeepseafood.com/" class="animated_link">The Deep Seafood Company</a>
+            </li>
+            <li>
+                <a href="https://oceano.ae/" class="animated_link">Oceano</a>
+            </li>
+            <li>
+                <a href="https://www.royalfuture.sa/" class="animated_link">Royal Future</a>
+            </li>
+        </ul>
+    </nav>
+    <!-- /menu -->
+    <div class="container-fluid">
+        <div class="row row-height">
+            <div class="col-xl-4 col-lg-4 content-left">
+                <div class="content-left-wrapper">
+                    <a href="{% url "insight_create" %}" id="logo">
+                        <img src="{% static 'images/logo/logo_white.png' %}"
+                             alt="{{ brand_name }}"
+                             width="85"
+                             height="65">
+                    </a>
+                    {% comment %} <div id="social">
+                        <ul>
+                            <li>
+                                <a href="#0"><i class="bi bi-facebook"></i></a>
+                            </li>
+                            <li>
+                                <a href="#0"><i class="bi bi-twitter-x"></i></a>
+                            </li>
+                            <li>
+                                <a href="#0"><i class="bi bi-instagram"></i></a>
+                            </li>
+                            <li>
+                                <a href="#0"><i class="bi bi-tiktok"></i></a>
+                            </li>
+                        </ul>
+                    </div> {% endcomment %}
+                    <!-- /social -->
+                    <div>
+                        <figure>
+                            <img src="{% static "images/hero/form_hero.png" %}"
+                                 alt="suggestion_hero"
+                                 class="img-fluid"
+                                 width="270"
+                                 height="270">
+                        </figure>
+                        <h2>We like your suggestions!</h2>
+                        <p>
+                            Tation argumentum et usu, dicit viderer evertitur te has. Eu dictas concludaturque usu, facete detracto patrioque an per, lucilius pertinacia eu vel.
+                        </p>
+                    </div>
+                    <div class="copy">© 2025 The Deep Seafood Company</div>
+                </div>
+                <!-- /content-left-wrapper -->
+            </div>
+            <!-- /content-left -->
+            <div class="col-xl-8 col-lg-8 content-right" id="start">
+                <div id="wizard_container">
+                    <div id="top-wizard">
+                        <span id="location"></span>
+                        <div id="progressbar"></div>
+                    </div>
+                    <!-- /top-wizard -->
+                    <form id="wrapped" method="post" enctype="multipart/form-data" action="{% url "insight_create" %}">
+                        {% csrf_token %}
+                        <input id="website" name="website" type="text" value="">
+                        <!-- Leave for security protection, read docs for details -->
+                        <div id="middle-wizard">
+                            <div class="step">
+                                <h2 class="section_title">Feedback / Suggestion</h2>
+                                <h3 class="main_question">Please enter you feedback or suggestions here.</h3>
+                                <div class="form-group add_top_30">
+                                    <label for="name">First and Last Name</label>
+                                    <input type="text" name="name" id="name" class="form-control required">
+                                </div>
+                                <div class="form-group">
+                                    <label for="department">Department</label>
+                                    <input type="text"
+                                           name="department"
+                                           id="department"
+                                           class="form-control required">
+                                </div>
+                                <div class="form-group">
+                                    <label for="feedback-suggestions">Feedback/Suggestions</label>
+                                    <textarea name="feedback-suggestions"
+                                              id="feedback-suggestions"
+                                              rows="14"
+                                              class="form-control required"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="related-department">Related Department</label>
+                                    <input type="text"
+                                           name="related_department"
+                                           id="related-department"
+                                           class="form-control required">
+                                </div>
+                                <div class="form-group add_bottom_30 add_top_20">
+                                    <label>
+                                        Upload Images
+                                        <br>
+                                        <small>(File accepted: .jpg, .jpeg, .png, .gif - Max file size: 5MB)</small>
+                                    </label>
+                                    <div class="fileupload">
+                                        <input type="file"
+                                               name="fileupload"
+                                               accept=".jpg,.jpeg,.png,.gif"
+                                               class="required">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /step-->
+                            <div class="submit step" id="end">
+                                <div class="summary">
+                                    <div class="wrapper">
+                                        <h3>
+                                            Thank your for your time
+                                            <br>
+                                            <span id="name_field"></span>!
+                                        </h3>
+                                        <p>
+                                            We will contact you shortly at the following email address <strong id="email_field"></strong>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /step last-->
+                        </div>
+                        <!-- /middle-wizard -->
+                        <div id="bottom-wizard">
+                            <button type="button" name="backward" class="backward">Prev</button>
+                            <button type="button" name="forward" class="forward">Next</button>
+                            <button type="submit" name="process" class="submit">Submit</button>
+                        </div>
+                        <!-- /bottom-wizard -->
+                    </form>
+                </div>
+                <!-- /Wizard container -->
+            </div>
+            <!-- /content-right-->
+        </div>
+        <!-- /row-->
+    </div>
 {% endblock content %}

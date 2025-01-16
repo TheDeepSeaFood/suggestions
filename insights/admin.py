@@ -13,7 +13,13 @@ class InsightAdmin(admin.ModelAdmin):
     list_filter = ("department", "related_department")
     search_fields = ("name", "feedback_or_suggestion")
     ordering = ("name",)
-    fields = ("name", "department", "related_department", "feedback_or_suggestion")
+    fields = (
+        "name",
+        "department",
+        "related_department",
+        "feedback_or_suggestion",
+        "image",
+    )
 
     def get_queryset(self, request):
         # Customize queryset to display Insights in ascending order of name

@@ -2,37 +2,77 @@ import logging
 
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, ListView
+from django.views.generic import ListView
 
-from insights.forms import InsightForm
 from insights.models import Insight
 
 logger = logging.getLogger("django")
 
 
-class InsightCreateView(CreateView):
-    model = Insight
-    form_class = InsightForm
-    template_name = "insights/create_insight.html"
-    success_url = reverse_lazy("insight_create")
+def create_insight_view(request):
+    page_title = "Suggestions/Feedback"
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["page_title"] = "Suggestions/Feedback"
-        return context
+    if request.method == "POST":
+        # Fetching data from the POST request
+        name = request.POST.get("name")
+        department = request.POST.get("department")
+        feedback_suggestions = request.POST.get("feedback-suggestions")
+        related_department = request.POST.get("related_department")
+        fileupload = request.FILES[("fileupload")]
 
-    def form_valid(self, form):
-        messages.success(
-            self.request, "Your Feedback/Suggestion has been recoded successfully"
-        )
-        return super().form_valid(form)
+        # Perform manual validation
+        errors = []
 
-    def form_invalid(self, form):
-        for error_list in form.errors.values():
-            for errors in error_list:
-                messages.error(self.request, errors, extra_tags="alert-danger")
-        return super().form_invalid(form)
+        if not name:
+            errors.append("Name is required.")
+        if not department:
+            errors.append("Department is required.")
+        if not feedback_suggestions:
+            errors.append("Feedback/Suggestions is required.")
+        if not related_department:
+            errors.append("Related Department is required.")
+        if fileupload:
+            if fileupload.content_type not in [
+                "image/jpeg",
+                "image/png",
+                "image/jpg",
+            ]:
+                errors.append("File must be an image of type .jpg, .jpeg or .png.")
+            if fileupload.size > 5 * 1024 * 1024:  # 5MB
+                errors.append("File size cannot exceed 5 MB.")
+        else:
+            errors.append("File upload is required.")
+
+        # If errors exist, add them to messages and return
+        if errors:
+            for error in errors:
+                messages.error(request, error, extra_tags="alert-danger")
+        else:
+            # Save the data to the model
+            try:
+                Insight.objects.create(
+                    name=name,
+                    department=department,
+                    feedback_or_suggestion=feedback_suggestions,
+                    related_department=related_department,
+                    image=fileupload,
+                )
+                messages.success(
+                    request, "Your Feedback/Suggestion has been recorded successfully"
+                )
+                return redirect(reverse_lazy("insight_create"))
+            except Exception as e:
+                messages.error(
+                    request, f"An error occurred: {e}", extra_tags="alert-danger"
+                )
+
+    return render(
+        request,
+        "insights/create_insight.html",
+        {"page_title": page_title},
+    )
 
 
 class InsightListView(LoginRequiredMixin, ListView):
