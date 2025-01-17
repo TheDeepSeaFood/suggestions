@@ -6,7 +6,7 @@ from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import ListView
 
-from insights.models import Insight
+from insights.models import Insight, Branch
 
 logger = logging.getLogger("django")
 
@@ -21,6 +21,7 @@ def create_insight_view(request):
         feedback_suggestions = request.POST.get("feedback-suggestions")
         related_department = request.POST.get("related_department")
         fileupload = request.FILES.get("fileupload")
+        branch_id = request.POST.get("branch")
 
         # Perform manual validation
         errors = []
@@ -40,6 +41,11 @@ def create_insight_view(request):
                 errors.append("File must be an image of type .jpg, .jpeg or .png.")
             if fileupload.size > 5 * 1024 * 1024:  # 5MB
                 errors.append("File size cannot exceed 5 MB.")
+        if branch_id:
+            try:
+                branch = Branch.objects.get(id=branch_id)
+            except Branch.DoesNotExist:
+                errors.append("Invalid branch selected.")
 
         # If errors exist, add them to messages and return
         if errors:
@@ -50,6 +56,7 @@ def create_insight_view(request):
             try:
                 Insight.objects.create(
                     name=name,
+                    branch=branch,
                     department=department,
                     feedback_or_suggestion=feedback_suggestions,
                     related_department=related_department,
@@ -67,7 +74,7 @@ def create_insight_view(request):
     return render(
         request,
         "insights/create_insight.html",
-        {"page_title": page_title},
+        {"page_title": page_title, "branches": Branch.objects.all()},
     )
 
 
