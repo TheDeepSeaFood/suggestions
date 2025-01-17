@@ -85,15 +85,15 @@ $("form#wrapped").validate({
 function getVals(formControl, controlType) {
   switch (controlType) {
     case "name_field":
-      // Get the value for input
+      // Get the value for input and set it to the summary area
       var value = $(formControl).val();
-      $("#name_field").text(value);
+      $("#name_field_summary").text(value); // Change the ID here to a new one
       break;
 
-    case "email_field":
-      // Get the value for input
+    case "feedback_suggestions":
+      // Get the value for input and set it to the summary area
       var value = $(formControl).val();
-      $("#email_field").text(value);
+      $("#feedback_suggestions_summary").text(value); // Change the ID here to a new one
       break;
   }
 }
