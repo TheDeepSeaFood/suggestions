@@ -248,7 +248,7 @@ ul.cd-primary-nav {
 }
 
 .no-touch .cd-primary-nav a:hover {
-  color: #1dbe72;
+  color: #0971ce;
 }
 
 .cd-primary-nav.fade-in {
@@ -329,7 +329,7 @@ ul.cd-primary-nav {
 }
 
 .cd-overlay-nav span {
-  background-color: #1dbe72;
+  background-color: #0971ce;
 }
 
 .cd-overlay-content {
@@ -338,5 +338,5 @@ ul.cd-primary-nav {
 }
 
 .cd-overlay-content span {
-  background-color: #1dbe72;
+  background-color: #0971ce;
 }
