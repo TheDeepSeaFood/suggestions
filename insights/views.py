@@ -20,7 +20,7 @@ def create_insight_view(request):
         department = request.POST.get("department")
         feedback_suggestions = request.POST.get("feedback-suggestions")
         related_department = request.POST.get("related_department")
-        fileupload = request.FILES[("fileupload")]
+        fileupload = request.FILES.get("fileupload")
 
         # Perform manual validation
         errors = []
