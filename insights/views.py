@@ -31,8 +31,6 @@ def create_insight_view(request):
             errors.append("Department is required.")
         if not feedback_suggestions:
             errors.append("Feedback/Suggestions is required.")
-        if not related_department:
-            errors.append("Related Department is required.")
         if fileupload:
             if fileupload.content_type not in [
                 "image/jpeg",
@@ -42,8 +40,6 @@ def create_insight_view(request):
                 errors.append("File must be an image of type .jpg, .jpeg or .png.")
             if fileupload.size > 5 * 1024 * 1024:  # 5MB
                 errors.append("File size cannot exceed 5 MB.")
-        else:
-            errors.append("File upload is required.")
 
         # If errors exist, add them to messages and return
         if errors:
