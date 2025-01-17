@@ -12,6 +12,7 @@
                     <th scope="col">Department</th>
                     <th scope="col">Feedback/Suggestion</th>
                     <th scope="col">Related Department</th>
+                    <th scope="col" class="text-center">Image</th>
                 </tr>
             </thead>
             <tbody>
@@ -23,6 +24,44 @@
                         <td>{{ insight.department }}</td>
                         <td class="text-break">{{ insight.feedback_or_suggestion }}</td>
                         <td>{{ insight.related_department }}</td>
+                        <td class="text-center">
+                            {% if insight.image %}
+                                <!-- Button to trigger the modal -->
+                                <button type="button"
+                                        class="btn btn-outline-secondary btn-sm"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#imageModal{{ insight.id }}">
+                                    <i class="bi bi-eye"></i>
+                                </button>
+                                <!-- Modal -->
+                                <div class="modal fade"
+                                     id="imageModal{{ insight.id }}"
+                                     tabindex="-1"
+                                     aria-labelledby="imageModalLabel"
+                                     aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="imageModalLabel">Insight Image</h5>
+                                                <button type="button"
+                                                        class="btn-close"
+                                                        data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <img class="img-fluid modal-image"
+                                                     src="{{ insight.image.url }}"
+                                                     alt="Insight Image"
+                                                     height="500px"
+                                                     width="500px">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% else %}
+                                <div class="alert alert-danger text-center mt-3" role="alert">There is no image added!</div>
+                            {% endif %}
+                        </td>
                     </tr>
                 {% endfor %}
             </tbody>
