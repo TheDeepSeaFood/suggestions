@@ -100,7 +100,7 @@
                         <!-- Leave for security protection, read docs for details -->
                         <div id="middle-wizard">
                             <div class="step">
-                                <h2 class="section_title">Feedback / Suggestion</h2>
+                                <h2 class="section_title">Vision Vault - Feedback / Suggestion</h2>
                                 <h3 class="main_question">Please enter you feedback or suggestions here.</h3>
                                 <div class="form-group add_top_30">
                                     <label for="name_field">First and Last Name</label>
@@ -112,7 +112,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="branch">Branch</label>
-                                    <select name="branch" id="branch" class="form-control required">
+                                    <select name="branch" id="branch" class="form-control required" onchange="getVals(this, 'branch');">
                                         <option value="">-- Select Branch --</option>
                                         {% for branch in branches %}<option value="{{ branch.id }}">{{ branch.name }}</option>{% endfor %}
                                     </select>
@@ -122,7 +122,8 @@
                                     <input type="text"
                                            name="department"
                                            id="department"
-                                           class="form-control required">
+                                           class="form-control required"
+                                           onchange="getVals(this, 'department');">
                                 </div>
                                 <div class="form-group">
                                     <label for="feedback_suggestions">Feedback/Suggestions</label>
@@ -137,12 +138,14 @@
                                     <input type="text"
                                            name="related_department"
                                            id="related-department"
-                                           class="form-control">
+                                           class="form-control"
+                                           onchange="getVals(this, 'related-department');">
                                 </div>
                                 <div class="form-group add_bottom_30 add_top_20">
                                     <label>
                                         Upload Images
                                         <br>
+                                        <small>Upload images related to your feedback/suggestions</small>
                                         <small>(File accepted: .jpg, .jpeg, .png, .gif - Max file size: 5MB)</small>
                                     </label>
                                     <div class="fileupload">
@@ -156,13 +159,22 @@
                             <!-- /step-->
                             <div class="submit step" id="end">
                                 <div class="summary">
-                                    <div class="wrapper">
+                                    <div class="wrapper text-start">
                                         <h3>
                                             Thank you for your time <span id="name_field_summary"></span>!
                                             <br>
                                         </h3>
-                                        <p>
-                                            Your Review - <strong id="feedback_suggestions_summary"></strong>
+                                        <p class="mb-0">
+                                            Branch - <strong id="branch_summary"></strong>
+                                        </p>
+                                        <p class="mb-0">
+                                            Department - <strong id="department_summary"></strong>
+                                        </p>
+                                        <p class="mb-0">
+                                            Review - <strong id="feedback_suggestions_summary"></strong>
+                                        </p>
+                                        <p class="mb-0">
+                                            Related Department - <strong id="related_department_summary"></strong>
                                         </p>
                                     </div>
                                 </div>

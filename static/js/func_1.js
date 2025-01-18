@@ -95,5 +95,23 @@ function getVals(formControl, controlType) {
       var value = $(formControl).val();
       $("#feedback_suggestions_summary").text(value); // Change the ID here to a new one
       break;
+
+    case "branch":
+      // Get the value for input and set it to the summary area
+      var value = $(formControl).find("option:selected").text();
+      $("#branch_summary").text(value); // Change the ID here to a new one
+      break;
+
+    case "department":
+      // Get the value for input and set it to the summary area
+      var value = $(formControl).val();
+      $("#department_summary").text(value); // Change the ID here to a new one
+      break;
+
+    case "related-department":
+      // Get the value for input and set it to the summary area
+      var value = $(formControl).val();
+      $("#related_department_summary").text(value); // Change the ID here to a new one
+      break;
   }
 }
