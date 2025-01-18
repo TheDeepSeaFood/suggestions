@@ -1158,6 +1158,20 @@ ul.contacts_info li:last-child {
 /* 3.  COMMON */
 /*============================================================================================*/
 /*-------- 3.1 Misc --------*/
+.scroll-to-bottom {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .scroll-to-bottom {
+    display: block;
+  }
+}
+
 .body_bg_2 {
   background-color: #f7f8fc;
 }
