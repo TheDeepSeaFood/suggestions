@@ -82,5 +82,5 @@ class InsightListView(LoginRequiredMixin, ListView):
     model = Insight
     template_name = "insights/list_insights.html"
     context_object_name = "insights"
-    ordering = ["department"]
+    ordering = ["-created_at"]
     paginate_by = 10
