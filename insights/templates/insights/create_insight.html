@@ -136,13 +136,16 @@
                                               class="required"
                                               onchange="getVals(this, 'feedback_suggestions');"></textarea>
                                 </div>
+
                                 <div class="form-group">
-                                    <label for="related-department">Related Department</label>
-                                    <input type="text"
-                                           name="related_department"
-                                           id="related-department"
-                                           class="form-control"
-                                           onchange="getVals(this, 'related-department');">
+                                    <label for="branch">Branch</label>
+                                    <select name="related_department"
+                                            id="related-department"
+                                            class="form-control required"
+                                            onchange="getVals(this, 'related-department');">
+                                        <option value="">--Select Related Department--</option>
+                                        {% for department in departments %}<option value="{{ department.id }}">{{ department.name }}</option>{% endfor %}
+                                    </select>
                                 </div>
                                 <div class="form-group add_bottom_30 add_top_20">
                                     <label>

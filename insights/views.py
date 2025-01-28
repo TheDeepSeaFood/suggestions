@@ -6,7 +6,7 @@ from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import ListView
 
-from insights.models import Insight, Branch
+from insights.models import Insight, Branch, Department
 
 logger = logging.getLogger("django")
 
@@ -19,9 +19,9 @@ def create_insight_view(request):
         name = request.POST.get("name")
         department = request.POST.get("department")
         feedback_suggestions = request.POST.get("feedback-suggestions")
-        related_department = request.POST.get("related_department")
         fileupload = request.FILES.get("fileupload")
         branch_id = request.POST.get("branch")
+        related_department_id = request.POST.get("related_department")
 
         # Perform manual validation
         errors = []
@@ -46,6 +46,12 @@ def create_insight_view(request):
                 branch = Branch.objects.get(id=branch_id)
             except Branch.DoesNotExist:
                 errors.append("Invalid branch selected.")
+
+        if related_department_id:
+            try:
+                related_department = Department.objects.get(id=related_department_id)
+            except Department.DoesNotExist:
+                errors.append("Invalid related department selected")
 
         # If errors exist, add them to messages and return
         if errors:
@@ -74,7 +80,11 @@ def create_insight_view(request):
     return render(
         request,
         "insights/create_insight.html",
-        {"page_title": page_title, "branches": Branch.objects.all()},
+        {
+            "page_title": page_title,
+            "branches": Branch.objects.all(),
+            "departments": Department.objects.all(),
+        },
     )
 
 

@@ -1,5 +1,10 @@
 from django.contrib import admin
-from insights.models import Insight, Brand, Branch
+from insights.models import Insight, Brand, Branch, Department
+
+
+@admin.register(Department)
+class DepartmentAdmin(admin.ModelAdmin):
+    list_display = ("name",)
 
 
 @admin.register(Brand)
@@ -25,7 +30,7 @@ class InsightAdmin(admin.ModelAdmin):
         "related_department",
         "feedback_or_suggestion",
         "image",
-        "created_at"
+        "created_at",
     )
 
     def get_queryset(self, request):

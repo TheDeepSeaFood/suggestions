@@ -110,7 +110,7 @@ function getVals(formControl, controlType) {
 
     case "related-department":
       // Get the value for input and set it to the summary area
-      var value = $(formControl).val();
+      var value = $(formControl).find("option:selected").text();
       $("#related_department_summary").text(value); // Change the ID here to a new one
       break;
   }

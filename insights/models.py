@@ -20,13 +20,22 @@ class Branch(models.Model):
         verbose_name_plural = "Branches"
 
 
+class Department(models.Model):
+    name = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name
+
+
 class Insight(models.Model):
     name = models.CharField(max_length=100)
     branch = models.ForeignKey(Branch, null=True, on_delete=models.SET_NULL)
     department = models.CharField(max_length=100)
     feedback_or_suggestion = models.TextField()
     image = models.ImageField(blank=True, null=True, upload_to="insight_images")
-    related_department = models.CharField(max_length=100)
+    related_department = models.ForeignKey(
+        Department, null=True, on_delete=models.SET_NULL
+    )
     created_at = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
