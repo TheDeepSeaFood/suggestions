@@ -7,6 +7,7 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView
 
 from insights.models import Insight, Branch
+from insights.utils import upload_file_to_gdrive
 
 logger = logging.getLogger("django")
 
@@ -41,6 +42,8 @@ def create_insight_view(request):
                 errors.append("File must be an image of type .jpg, .jpeg or .png.")
             if fileupload.size > 5 * 1024 * 1024:  # 5MB
                 errors.append("File size cannot exceed 5 MB.")
+
+            upload_file_to_gdrive()
         if branch_id:
             try:
                 branch = Branch.objects.get(id=branch_id)
