@@ -2,11 +2,13 @@ import logging
 
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponseBadRequest
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import ListView
 
-from insights.models import Insight, Branch, Department
+from insights.models import Branch, Department, Insight
+from insights.utils import export_insights_to_excel
 
 logger = logging.getLogger("django")
 
@@ -94,3 +96,15 @@ class InsightListView(LoginRequiredMixin, ListView):
     context_object_name = "insights"
     ordering = ["-created_at"]
     paginate_by = 10
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["page_title"] = "List Insights"
+        return context
+
+
+def export_insights(request):
+    if request.method == "GET":
+        response = export_insights_to_excel()
+        return response
+    return HttpResponseBadRequest("Invalid request method")
