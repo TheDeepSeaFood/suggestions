@@ -3,7 +3,7 @@ from django.urls import path
 from insights import views
 
 urlpatterns = [
-    # NOTE: This urls handle different forms
+    # NOTE: This are same views with different branches and areas
     path("", views.CreateInsightView.as_view(), name="insight_create"),
     path("royalfuture/", views.CreateInsightView.as_view(), name="insight_create_royalfuture"),
     path("qatar/", views.CreateInsightView.as_view(), name="insight_create_qatar"),

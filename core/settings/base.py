@@ -29,7 +29,10 @@ EXTERNAL_APPS = [
 
 INSTALLED_APPS += EXTERNAL_APPS
 
+AUTH_USER_MODEL = "accounts.User"
+
 LOGIN_REDIRECT_URL = "insight_list"
+
 LOGOUT_REDIRECT_URL = "insight_create"
 
 MIDDLEWARE = [

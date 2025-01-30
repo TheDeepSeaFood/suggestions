@@ -130,14 +130,6 @@
                                            onchange="getVals(this, 'department');">
                                 </div>
                                 <div class="form-group">
-                                    <label for="feedback_suggestions">Feedback/Suggestions</label>
-                                    <textarea name="feedback-suggestions"
-                                              id="feedback_suggestions"
-                                              rows="3"
-                                              class="required"
-                                              onchange="getVals(this, 'feedback_suggestions');"></textarea>
-                                </div>
-                                <div class="form-group">
                                     <label for="related-department">Related Department</label>
                                     <select name="related_department"
                                             id="related-department"
@@ -148,6 +140,14 @@
                                             <option value="{{ department.id }}">{{ department.name }}</option>
                                         {% endfor %}
                                     </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="feedback_suggestions">Feedback/Suggestions</label>
+                                    <textarea name="feedback-suggestions"
+                                              id="feedback_suggestions"
+                                              rows="3"
+                                              class="required"
+                                              onchange="getVals(this, 'feedback_suggestions');"></textarea>
                                 </div>
                                 <div class="form-group add_bottom_30 add_top_20">
                                     <label>

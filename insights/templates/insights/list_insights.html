@@ -3,8 +3,21 @@
 {% block content %}
     {% include "navigation_bar.html" %}
     <div class="container">
-        <div class="text-end mt-2">
-            <a href="{% url "export_insights" %}" class="btn btn-sm btn-primary">Export Data</a>
+        <div class="row mt-2">
+            <div class="col">
+                {% if user.is_superuser %}
+                    <span>All Feedbacks/Suggestions</span>
+                {% elif user.user_type == "DSF" %}
+                    <span>Feedback/Suggestions of Deep seafood</span>
+                {% elif user.user_type == "ROF" %}
+                    <span>Feedback/Suggestions of Royal Future</span>
+                {% elif user.user_type == "QAR" %}
+                    <span>Feedback/Suggestions of Qatar</span>
+                {% endif %}
+            </div>
+            <div class="col text-end">
+                <a href="{% url "export_insights" %}" class="btn btn-sm btn-primary">Export Data</a>
+            </div>
         </div>
         <table class="table table-striped table-hover table-bordered mt-2">
             <thead>
@@ -15,7 +28,7 @@
                     <th scope="col">Branch</th>
                     <th scope="col">Department</th>
                     <th scope="col">Feedback/Suggestion</th>
-                    <th scope="col">Related Department</th>
+                    <th scope="col">Subject</th>
                     <th scope="col" class="text-center">Image</th>
                 </tr>
             </thead>
