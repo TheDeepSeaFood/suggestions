@@ -97,13 +97,14 @@
                           action="{% url "insight_create" %}">
                         {% csrf_token %}
                         <input id="website" name="website" type="text" value="">
+                        <input type="hidden" name="type" id="type_field" value="">
                         <!-- Leave for security protection, read docs for details -->
                         <div id="middle-wizard">
                             <div class="step">
                                 <h2 class="section_title">Feedback/Suggestion</h2>
                                 <h3 class="main_question">Please enter you feedback or suggestions here.</h3>
                                 <div class="form-group add_top_30">
-                                    <label for="name_field">First and Last Name</label>
+                                    <label for="name_field">Name</label>
                                     <input type="text"
                                            name="name"
                                            id="name_field"
@@ -142,8 +143,10 @@
                                             id="related-department"
                                             class="form-control required"
                                             onchange="getVals(this, 'related-department');">
-                                        <option value="">--Select Related Department--</option>
-                                        {% for department in departments %}<option value="{{ department.id }}">{{ department.name }}</option>{% endfor %}
+                                        <option value="">--Select the Subject--</option>
+                                        {% for department in departments %}
+                                            <option value="{{ department.id }}">{{ department.name }}</option>
+                                        {% endfor %}
                                     </select>
                                 </div>
                                 <div class="form-group add_bottom_30 add_top_20">
@@ -201,3 +204,17 @@
         <!-- /row-->
     </div>
 {% endblock content %}
+{% block scripts %}
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let currentPath = window.location.pathname;
+        let sourceField = document.getElementById("type_field");
+
+        if (currentPath.includes("royalfuture")) {
+            sourceField.value = "ROF";
+        } else if (currentPath.includes("qatar")) {
+            sourceField.value = "QAR";
+        }
+    });
+    </script>
+{% endblock scripts %}

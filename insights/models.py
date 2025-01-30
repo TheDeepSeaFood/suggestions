@@ -37,6 +37,13 @@ class Insight(models.Model):
         Department, null=True, on_delete=models.SET_NULL
     )
     created_at = models.DateTimeField(default=timezone.now)
+    # NOTE : (type)This is done here because we did not have a clear definition of how to filter
+    # this there is mix of branch and brand so decided to use type
+    type = models.CharField(
+        max_length=255,
+        choices=[("DSF", "Deep Seafood"), ("ROF", "Royal Future"), ("QAR", "Qatar")],
+        default="DSF",
+    )
 
     def __str__(self):
         return self.name

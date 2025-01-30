@@ -29,7 +29,7 @@ EXTERNAL_APPS = [
 
 INSTALLED_APPS += EXTERNAL_APPS
 
-LOGIN_REDIRECT_URL = "insight_create"
+LOGIN_REDIRECT_URL = "insight_list"
 LOGOUT_REDIRECT_URL = "insight_create"
 
 MIDDLEWARE = [

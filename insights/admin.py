@@ -19,9 +19,9 @@ class BranchAdmin(admin.ModelAdmin):
 
 @admin.register(Insight)
 class InsightAdmin(admin.ModelAdmin):
-    list_display = ("name", "department", "related_department", "created_at")
-    list_filter = ("department", "related_department", "created_at")
-    search_fields = ("name", "feedback_or_suggestion")
+    list_display = ("name", "department", "type", "created_at")
+    list_filter = ("department", "related_department", "created_at", "type")
+    search_fields = ("name", "feedback_or_suggestion", "type")
     ordering = ("name",)
     fields = (
         "name",
@@ -31,6 +31,7 @@ class InsightAdmin(admin.ModelAdmin):
         "feedback_or_suggestion",
         "image",
         "created_at",
+        "type",
     )
 
     def get_queryset(self, request):
