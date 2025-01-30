@@ -5,23 +5,26 @@ from insights.models import Insight, Brand, Branch, Department
 @admin.register(Department)
 class DepartmentAdmin(admin.ModelAdmin):
     list_display = ("name",)
+    search_fields = ("name",)
 
 
 @admin.register(Brand)
 class BrandAdmin(admin.ModelAdmin):
     list_display = ("name",)
+    search_fields = ("name",)
 
 
 @admin.register(Branch)
 class BranchAdmin(admin.ModelAdmin):
     list_display = ("name",)
+    search_fields = ("name",)
 
 
 @admin.register(Insight)
 class InsightAdmin(admin.ModelAdmin):
     list_display = ("name", "department", "related_department", "created_at")
     list_filter = ("department", "related_department", "created_at")
-    search_fields = ("name", "feedback_or_suggestion")
+    search_fields = ("name", "department")
     ordering = ("name",)
     fields = (
         "name",

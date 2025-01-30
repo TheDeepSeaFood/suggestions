@@ -29,7 +29,9 @@ EXTERNAL_APPS = [
 
 INSTALLED_APPS += EXTERNAL_APPS
 
-LOGIN_REDIRECT_URL = "insight_create"
+AUTH_USER_MODEL = "accounts.User"
+
+LOGIN_REDIRECT_URL = "insight_list"
 LOGOUT_REDIRECT_URL = "insight_create"
 
 MIDDLEWARE = [
@@ -55,7 +57,6 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-                "insights.context_processors.brand_name",
             ],
         },
     },
