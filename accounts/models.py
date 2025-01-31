@@ -10,7 +10,6 @@ class User(AbstractUser):
         ("DSF", "Deep Seafood"),
         ("ROF", "Royal Future"),
         ("QAR", "Qatar"),
-        ("AIN", "Al-Ain"),
         ("ABD", "Abu Dhabi"),
     ]
 

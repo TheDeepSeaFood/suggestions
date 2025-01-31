@@ -50,7 +50,6 @@ class Insight(models.Model):
             ("DSF", "Deep Seafood"),
             ("ROF", "Royal Future"),
             ("QAR", "Qatar"),
-            ("AIN", "Al-Ain"),
             ("ABD", "Abu Dhabi"),
         ],
         default="DSF",

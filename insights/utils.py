@@ -50,9 +50,9 @@ def create_insight(
         try:
             branch = Branch.objects.get(id=branch_id)
             if branch.name == "Abu Dhabi":
+                # NOTE: This will set the type of the instance to ABD so that it can be used
+                # for filtering the insights
                 type = "ABD"
-            elif branch.name == "Al Ain":
-                type = "AIN"
         except ObjectDoesNotExist:
             errors.append("Invalid branch selected.")
 
