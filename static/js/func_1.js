@@ -117,11 +117,41 @@ function getVals(formControl, controlType) {
 }
 
 // Add event listener to scroll to the bottom of the page
-document
-  .getElementById("scrollToBottom")
-  .addEventListener("click", function () {
+// document
+//   .getElementById("scrollToBottom")
+//   .addEventListener("click", function () {
+//     window.scrollTo({
+//       top: document.body.scrollHeight,
+//       behavior: "smooth", // Smooth scrolling effect
+//     });
+//   });
+
+document.addEventListener("DOMContentLoaded", function () {
+  let scrollButton = document.getElementById("scrollToBottom");
+
+  // Function to check if the user is at the bottom of the page
+  function checkScroll() {
+    if (
+      window.innerHeight + window.scrollY >=
+      document.body.scrollHeight - 10
+    ) {
+      scrollButton.style.display = "none"; // Hide button
+    } else {
+      scrollButton.style.display = "block"; // Show button
+    }
+  }
+
+  // Scroll event listener
+  window.addEventListener("scroll", checkScroll);
+
+  // Click event listener for scrolling to bottom
+  scrollButton.addEventListener("click", function () {
     window.scrollTo({
       top: document.body.scrollHeight,
-      behavior: "smooth", // Smooth scrolling effect
+      behavior: "smooth",
     });
   });
+
+  // Initial check in case the page loads already scrolled to bottom
+  checkScroll();
+});
