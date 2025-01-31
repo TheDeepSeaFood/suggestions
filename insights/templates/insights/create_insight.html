@@ -46,7 +46,8 @@
             <div class="col-xl-4 col-lg-4 content-left">
                 <div class="content-left-wrapper">
                     <a href="{% url "insight_create" %}" id="logo">
-                        <img id="logo-img" src="{% static 'images/logo/logo_white.png' %}"
+                        <img id="logo-img"
+                             src="{% static 'images/logo/logo_white.png' %}"
                              alt="{{ brand_name }}"
                              width="130"
                              height="80">
@@ -190,7 +191,9 @@
     document.addEventListener("DOMContentLoaded", function () {
         let currentPath = window.location.pathname;
         let sourceField = document.getElementById("type_field");
-        let logo_main = document.getElementById("logo-img")
+        let logo_main = document.getElementById("logo-img");
+        let branchSelect = document.getElementById("branch");
+    let formGroup = branchSelect.closest(".form-group");
 
         if (currentPath.includes("royalfuture")) {
             sourceField.value = "ROF";
@@ -199,6 +202,9 @@
             logo_main.height = 90;
         } else if (currentPath.includes("qatar")) {
             sourceField.value = "QAR";
+            branchSelect.classList.remove("required"); // Disable required validation
+            branchSelect.disabled = true; // Disable the dropdown
+            formGroup.style.display = "none"; // Hide the entire form group
         }
     });
     </script>

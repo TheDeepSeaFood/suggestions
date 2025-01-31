@@ -11,6 +11,11 @@ class Brand(models.Model):
 
 class Branch(models.Model):
     name = models.CharField(max_length=255)
+    type = models.CharField(
+        max_length=255,
+        choices=[("DSF", "Deep Seafood"), ("ROF", "Royal Future")],
+        default="DSF",
+    )
 
     def __str__(self):
         return self.name

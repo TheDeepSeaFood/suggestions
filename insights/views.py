@@ -17,17 +17,22 @@ class CreateInsightView(View):
     template_name = "insights/create_insight.html"
 
     def get(self, request):
+        # NOTE : This is done so that royal future has separate branch than dsf and qatar
+        branch_type = "DSF"  # Default type
+        if "royalfuture" in request.path.lower():
+            branch_type = "ROF"
         return render(
             request,
             self.template_name,
             {
                 "page_title": "Suggestions/Feedback",
-                "branches": Branch.objects.all(),
+                "branches": Branch.objects.filter(type=branch_type),
                 "departments": Department.objects.all(),
             },
         )
 
     def post(self, request):
+        # NOTE: type_value refers to the DSF or Royal Future or Qatar
         type_value = request.POST.get("type")
         success, response_messages = create_insight(
             name=request.POST.get("name"),
