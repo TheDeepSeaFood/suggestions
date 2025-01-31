@@ -4,11 +4,14 @@ from django.db import models
 
 
 class User(AbstractUser):
-
+    # NOTE: This are not clearly defined as to be of branch or brand
+    # this is the reason the type filed is mixed
     USER_TYPE_CHOICES = [
         ("DSF", "Deep Seafood"),
         ("ROF", "Royal Future"),
         ("QAR", "Qatar"),
+        ("AIN", "Al-Ain"),
+        ("ABD", "Abu Dhabi"),
     ]
 
     user_type = models.CharField(max_length=10, choices=USER_TYPE_CHOICES)

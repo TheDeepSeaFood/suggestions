@@ -30,6 +30,7 @@ def create_insight(
     errors = []
     branch = None
     related_department = None
+    allowed_types = ["DSF", "ROF", "QAR", "AIN", "ABD"]
 
     # Validation
     if not name:
@@ -48,6 +49,10 @@ def create_insight(
     if branch_id:
         try:
             branch = Branch.objects.get(id=branch_id)
+            if branch.name == "Abu Dhabi":
+                type = "ABD"
+            elif branch.name == "Al Ain":
+                type = "AIN"
         except ObjectDoesNotExist:
             errors.append("Invalid branch selected.")
 
@@ -57,8 +62,6 @@ def create_insight(
         except ObjectDoesNotExist:
             errors.append("Invalid related department selected.")
 
-    # Validate type
-    allowed_types = ["DSF", "ROF", "QAR"]
     if type not in allowed_types:
         type = "DSF"  # Default value if invalid
 

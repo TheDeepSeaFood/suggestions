@@ -46,7 +46,13 @@ class Insight(models.Model):
     # this there is mix of branch and brand so decided to use type
     type = models.CharField(
         max_length=255,
-        choices=[("DSF", "Deep Seafood"), ("ROF", "Royal Future"), ("QAR", "Qatar")],
+        choices=[
+            ("DSF", "Deep Seafood"),
+            ("ROF", "Royal Future"),
+            ("QAR", "Qatar"),
+            ("AIN", "Al-Ain"),
+            ("ABD", "Abu Dhabi"),
+        ],
         default="DSF",
     )
 
